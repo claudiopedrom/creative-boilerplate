@@ -26,17 +26,9 @@ Run the development server:
 
 ```bash
 npm run start
-# or
-npm run development
 ```
 
-Open [http://localhost:8000](http://localhost:8000) with your browser to see the result.
-
-To build the project:
-
-```bash
-npm run build
-```
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## Other commands:
 
