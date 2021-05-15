@@ -1,8 +1,27 @@
 {
   "name": "creative-boilerplate",
   "version": "1.0.0",
-  "author": "Cláudio Mindouro",
-  "license": "ISC",
+  "author": {
+    "name": "Cláudio Mindouro",
+		"email": "claudiopedrom@gmail.com",
+		"url": "https://www.mindouro.com/"
+  },
+  "description": "A boilerplate for creative code",
+  "repository": {
+		"type": "git",
+		"url": "git+https://github.com/claudiopedrom/creative-boilerplate"
+	},
+  "keywords": [
+    "creative",
+		"boilerplate",
+		"webgl",
+		"threejs",
+		"gsap",
+    "webpack",
+		"express",
+		"pug"
+  ],
+  "license": "MIT",
   "private": true,
   "scripts": {
     "development": "webpack serve --progress --config webpack.config.development.js",
