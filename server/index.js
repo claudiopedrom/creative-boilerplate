@@ -8,9 +8,9 @@ const Prismic = require('@prismicio/client')
 const PrismicDOM = require('prismic-dom')
 const api = require('./utils/api')
 
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config()
-}
+// if (process.env.NODE_ENV !== 'production') {
+//   require('dotenv').config()
+// }
 
 const app = express()
 const port = 3000
@@ -18,6 +18,7 @@ const port = 3000
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'pug')
 
+app.use(express.static(path.join(__dirname, '..', 'public')))
 // app.use(logger('dev'))
 // app.use(bodyParser.json())
 // app.use(bodyParser.urlencoded({ extended: false }))

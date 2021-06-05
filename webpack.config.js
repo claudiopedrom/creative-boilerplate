@@ -37,28 +37,33 @@ module.exports = {
           noErrorOnMissing: true
         }
       ]
-    }),
-    new ImageMinimizerPlugin({
-      minimizerOptions: {
-        plugins: [
-          ['gifsicle', { interlaced: true }],
-          ['jpegtran', { progressive: true }],
-          ['optipng', { optimizationLevel: 5 }],
-          [
-            'svgo',
-            {
+    })
+  ].concat(
+    IS_DEVELOPMENT
+      ? []
+      : [
+          new ImageMinimizerPlugin({
+            minimizerOptions: {
               plugins: [
-                {
-                  removeViewBox: false
-                }
+                ['gifsicle', { interlaced: true }],
+                ['jpegtran', { progressive: true }],
+                ['optipng', { optimizationLevel: 5 }],
+                [
+                  'svgo',
+                  {
+                    plugins: [
+                      {
+                        removeViewBox: false
+                      }
+                    ]
+                  }
+                ]
               ]
             }
-          ]
+          }),
+          new MiniCssExtractPlugin()
         ]
-      }
-    }),
-    new MiniCssExtractPlugin()
-  ],
+  ),
   module: {
     rules: [
       {
@@ -74,22 +79,19 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              publicPath: ''
-            }
-          },
+          IS_DEVELOPMENT ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
-          'sass-loader',
-          {
-            loader: 'postcss-loader'
-          }
+          'postcss-loader',
+          'sass-loader'
         ]
       },
       {
-        test: /\.(png|jpe?g|gif|svg)$/i,
-        loader: 'file-loader'
+        test: /\.(png|jpe?g|gif)$/i,
+        type: 'asset/resource'
+      },
+      {
+        test: /\.(woff(2)?|ttf|eot|svg)$/i,
+        type: 'asset/inline'
       },
       {
         test: /\.(glsl|vs|fs|vert|frag)$/,
