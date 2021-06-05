@@ -1,0 +1,42 @@
+block variables
+
+doctype html
+html(lang="en")
+
+  head
+    meta(charset="utf-8")
+    title=meta.data.title
+    meta(name="title", content=meta.data.title)
+    meta(name="description", content=meta.data.description)
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+
+    base(href="/")
+
+    //- Open Graph / Facebook
+    meta(property="og:type", content="website")
+    //- meta(property="og:url", content="https://metatags.io/")
+    meta(property="og:title", content=meta.data.title)
+    meta(property="og:description", content=meta.data.description)
+    meta(property="og:image", content=meta.data.image ? meta.data.image.url : '')
+
+    //- Twitter
+    meta(property="twitter:card", content="summary_large_image")
+    //- meta(property="twitter:url", content="https://metatags.io/")
+    meta(property="twitter:title", content=meta.data.title)
+    meta(property="twitter:description", content=meta.data.description)
+    meta(property="twitter:image", content=meta.data.image ? meta.data.image.url : '')
+
+    link(rel="manifest", href="site.webmanifest")
+    link(rel="apple-touch-icon", href="icon.png")
+
+    link(rel="stylesheet", href="main.css")
+
+    meta(name="theme-color", content="#fafafa")
+
+  body
+    include partials/navigation
+
+    main.content(data-template=template)
+      block content
+
+    script(src="main.js")

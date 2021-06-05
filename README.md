@@ -16,6 +16,8 @@ The main differences from what was taught are:
 
 ## Getting Started
 
+Create a `.env` file and update with your Prismic details (use the `.env.example` as reference).
+
 Install the project dependencies:
 
 ```bash
@@ -25,7 +27,7 @@ npm install
 Run the development server:
 
 ```bash
-npm run start
+npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
