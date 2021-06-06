@@ -1,0 +1,8 @@
+%title-10 {
+  font-family: $font-george-x;
+
+  @include media('>lg') {
+    font-size: 10rem;
+    line-height: 1;
+  }
+}
