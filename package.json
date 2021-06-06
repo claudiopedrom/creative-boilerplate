@@ -30,16 +30,16 @@
     "build:frontend": "webpack --progress --config webpack.config.build.js",
     "dev": "npm-run-all --parallel dev:*",
     "lint": "npm-run-all --parallel lint:*",
-    "lint:scripts": "eslint src/**/*.js --max-warnings=0",
-    "lint:styles": "stylelint src/**/*.{css,scss} --allow-empty-input",
+    "lint:scripts": "eslint src/**/*.js --max-warnings=0 --fix",
+    "lint:styles": "stylelint src/styles/**/*.scss --fix",
     "prepare": "husky install"
   },
   "lint-staged": {
     "src/**/*.js": [
-      "npm run lint:scripts --fix"
+      "npm run lint:scripts"
     ],
-    "src/**/*.{css,scss}": [
-      "npm run lint:styles --fix"
+    "src/styles/**/*.scss": [
+      "npm run lint:styles"
     ]
   },
   "devDependencies": {
