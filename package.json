@@ -30,15 +30,15 @@
     "build:frontend": "webpack --progress --config webpack.config.build.js",
     "dev": "npm-run-all --parallel dev:*",
     "lint": "npm-run-all --parallel lint:*",
-    "lint:scripts": "eslint src/**/*.js --max-warnings=0 --fix",
-    "lint:styles": "stylelint src/styles/**/*.scss --fix",
+    "lint:scripts": "eslint 'src/**/*.js' --max-warnings=0 --fix",
+    "lint:styles": "stylelint 'src/**/*.scss' --fix",
     "prepare": "husky install"
   },
   "lint-staged": {
     "src/**/*.js": [
       "npm run lint:scripts"
     ],
-    "src/styles/**/*.scss": [
+    "src/**/*.scss": [
       "npm run lint:styles"
     ]
   },
