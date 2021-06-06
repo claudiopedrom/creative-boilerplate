@@ -1,4 +1,11 @@
-// Pages
+@import './utils/variables';
+@import './utils/functions';
+@import './utils/mixins';
+
+@import './base/reset';
+@import './base/fonts';
+@import './base/base';
+
 @import './pages/home/home';
 @import './pages/about/about';
 @import './pages/detail/detail';

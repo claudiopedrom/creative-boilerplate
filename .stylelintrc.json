@@ -2,8 +2,6 @@
   "extends": ["stylelint-config-standard", "stylelint-config-recess-order", "stylelint-prettier/recommended"],
   "rules": {
     "block-no-empty": null,
-    "at-rule-no-unknown": [ true, {
-      "ignoreAtRules": ["extend", "include"]
-    }]
+    "at-rule-no-unknown": null
   }
 }
