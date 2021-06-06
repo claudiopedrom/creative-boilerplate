@@ -2,11 +2,14 @@
 @import './utils/functions';
 @import './utils/mixins';
 @import './utils/vendors';
+@import './utils/responsive';
 
 @import './base/reset';
 @import './base/fonts';
 @import './base/base';
 
-@import './pages/home/home';
-@import './pages/about/about';
-@import './pages/detail/detail';
+// @import './components/<component-name>';
+
+@import './pages/home';
+@import './pages/about';
+@import './pages/detail';
