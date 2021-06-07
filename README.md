@@ -9,10 +9,14 @@ The main differences from what was taught are:
 * It includes a simple GitHub action that checks our code when a Pull Request is open;
 * `husky` and `lint-staged` configured to lint and fix our code on `pre-commit`;
 * A different folder structure, `styles` and `assets` live inside a `src` folder;
+* `fonts` are stored inside the `assets` folder;
 * New folder on the root for `static` assets;
 * Some of the webpack configurations were not needed and were removed from the file;
+* Webpack was set up to use `Asset Modules` instead of the old webpack 4 way with loaders;
 * Setup of different `alias` on webpack, also set on the `jsconfig.json` to work properly on VSCode;
-* Individual `postcss` configuration.
+* Individual `postcss` configuration;
+* It uses Bootstrap 5 reboot instead of Meyer's reset;
+* Everything related to Express are inside the `server` folder.
 
 ## Getting Started
 
