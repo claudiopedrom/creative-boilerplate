@@ -4,31 +4,22 @@ import Home from '@/pages/home'
 import About from '@/pages/about'
 import Detail from '@/pages/detail'
 
+import Preloader from '@/components/Preloader'
+
 class App {
   constructor() {
+    // Page
     this.getPageTemplate()
     this.createPage()
+
+    // Components
+    this.createPreloader()
+
+    // Listeners
     this.addLinkListeners()
   }
 
-  getPageTemplate() {
-    this.content = document.querySelector('.content')
-    this.template = this.content.getAttribute('data-template')
-  }
-
-  createPage() {
-    this.allPages = {
-      home: new Home(),
-      about: new About(),
-      detail: new Detail()
-    }
-
-    this.currentPage = this.allPages[this.template]
-    this.currentPage.create()
-    this.currentPage.show()
-  }
-
-  async handlePageChange(url) {
+  async onPageChange(url) {
     await this.currentPage.hide()
 
     const request = await window.fetch(url)
@@ -48,9 +39,37 @@ class App {
       this.currentPage = this.allPages[this.template]
       this.currentPage.create()
       this.currentPage.show()
+
+      this.addLinkListeners()
     } else {
       throw new Error('Something went wrong.')
     }
+  }
+
+  getPageTemplate() {
+    this.content = document.querySelector('.content')
+    this.template = this.content.getAttribute('data-template')
+  }
+
+  createPage() {
+    this.allPages = {
+      home: new Home(),
+      about: new About(),
+      detail: new Detail()
+    }
+
+    this.currentPage = this.allPages[this.template]
+    this.currentPage.create()
+  }
+
+  onPreloaded() {
+    this.preloader.destroy()
+    this.currentPage.show()
+  }
+
+  createPreloader() {
+    this.preloader = new Preloader()
+    this.preloader.once('completed', this.onPreloaded.bind(this))
   }
 
   addLinkListeners() {
@@ -62,7 +81,7 @@ class App {
 
         const { href } = link
 
-        this.handlePageChange(href)
+        this.onPageChange(href)
       }
     })
   }
