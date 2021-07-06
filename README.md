@@ -1,3 +1,14 @@
+# Creative Boilerplate
+
+Before using this boilerplate, it is important to note that some things are missing:
+- [ ] Finish the Server part;
+- [ ] Fallback to Prismic CMS;
+- [ ] Add some base components (Preloader, etc.);
+- [ ] Add missing part of JavaScript / WebGL;
+- [ ] Possibly add TypeScript.
+
+## About
+
 This boilerplate is build on top of the amazing course taught by [Luis Henrique Bizarro](https://github.com/lhbizarro) on awwwards.academy.
 
 The main differences from what was taught are:
