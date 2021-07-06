@@ -83,7 +83,7 @@
   "dependencies": {
     "@babel/runtime": "7.14.6",
     "@prismicio/client": "5.1.0",
-    "dotenv": "9.0.2",
+    "dotenv": "10.0.0",
     "errorhandler": "1.5.1",
     "express": "4.17.1",
     "gsap": "3.7.0",
