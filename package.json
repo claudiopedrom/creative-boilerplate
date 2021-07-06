@@ -55,7 +55,7 @@
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-prettier": "3.4.0",
     "glslify-loader": "2.0.0",
-    "husky": "7.0.0",
+    "husky": "7.0.1",
     "image-minimizer-webpack-plugin": "2.2.0",
     "imagemin-gifsicle": "7.0.0",
     "imagemin-jpegtran": "7.0.0",
