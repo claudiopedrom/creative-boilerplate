@@ -86,7 +86,7 @@
     "dotenv": "10.0.0",
     "errorhandler": "1.5.1",
     "express": "4.17.1",
-    "gsap": "3.7.0",
+    "gsap": "3.7.1",
     "include-media": "1.4.10",
     "lodash": "4.17.21",
     "prismic-dom": "2.2.5",
