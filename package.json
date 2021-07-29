@@ -89,7 +89,7 @@
     "gsap": "3.7.1",
     "include-media": "1.4.10",
     "lodash": "4.17.21",
-    "prismic-dom": "2.2.5",
+    "prismic-dom": "2.2.6",
     "pug": "3.0.2"
   }
 }
