@@ -81,7 +81,7 @@
     "webpack-merge": "5.8.0"
   },
   "dependencies": {
-    "@babel/runtime": "7.14.8",
+    "@babel/runtime": "7.15.3",
     "@prismicio/client": "5.1.0",
     "dotenv": "10.0.0",
     "errorhandler": "1.5.1",
