@@ -53,7 +53,7 @@
     "css-loader": "6.2.0",
     "eslint": "7.32.0",
     "eslint-config-prettier": "8.3.0",
-    "eslint-plugin-prettier": "3.4.0",
+    "eslint-plugin-prettier": "3.4.1",
     "glslify-loader": "2.0.0",
     "husky": "7.0.1",
     "image-minimizer-webpack-plugin": "2.2.0",
