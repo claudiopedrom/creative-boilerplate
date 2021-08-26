@@ -18,3 +18,11 @@ exports.initApi = req => {
     req
   })
 }
+
+exports.handleRequest = async api => {
+  const meta = await api.getSingle('meta')
+
+  return {
+    meta
+  }
+}

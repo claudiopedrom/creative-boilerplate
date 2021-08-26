@@ -1,16 +1,12 @@
+require('dotenv').config()
 const path = require('path')
 const express = require('express')
 // const logger = require('morgan')
 // const errorHandler = require('errorHandler')
 // const bodyParser = require('body-parser')
 // const methodOverride = require('method-override')
-const Prismic = require('@prismicio/client')
 const PrismicDOM = require('prismic-dom')
 const api = require('./utils/api')
-
-// if (process.env.NODE_ENV !== 'production') {
-//   require('dotenv').config()
-// }
 
 const app = express()
 const port = 3000
@@ -38,23 +34,30 @@ app.use((_req, res, next) => {
   next()
 })
 
-app.get('/', (req, res) => {
-  res.render('pages/home')
+app.get('/', async (req, res) => {
+  const getApi = await api.initApi(req)
+  const defaults = await api.handleRequest(getApi)
+
+  res.render('pages/home', { ...defaults })
 })
 
-app.get('/about', (req, res) => {
-  api.initApi(req).then(api => {
-    api.query(Prismic.Predicates.any('document.type', ['about', 'meta'])).then(response => {
-      const { results } = response
-      const [about, meta] = results
+app.get('/about', async (req, res) => {
+  const getApi = await api.initApi(req)
+  const defaults = await api.handleRequest(getApi)
+  const about = await getApi.getSingle('about')
 
-      res.render('pages/about', { about, meta })
-    })
+  res.render('pages/about', { ...defaults, about })
+})
+
+app.get('/detail/:uid', async (req, res) => {
+  const getApi = await api.initApi(req)
+  const defaults = await api.handleRequest(getApi)
+
+  const product = await getApi.getByUID('product', req.params.uid, {
+    fetchLinks: 'collection.title'
   })
-})
 
-app.get('/detail/:uid', (req, res) => {
-  res.render('pages/detail')
+  res.render('pages/detail', { ...defaults, product })
 })
 
 app.listen(port, () => {
