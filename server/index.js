@@ -1,10 +1,6 @@
 require('dotenv').config()
 const path = require('path')
 const express = require('express')
-// const logger = require('morgan')
-// const errorHandler = require('errorHandler')
-// const bodyParser = require('body-parser')
-// const methodOverride = require('method-override')
 const PrismicDOM = require('prismic-dom')
 const api = require('./utils/api')
 
@@ -15,15 +11,6 @@ app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'pug')
 
 app.use(express.static(path.join(__dirname, '..', 'public')))
-// app.use(logger('dev'))
-// app.use(bodyParser.json())
-// app.use(bodyParser.urlencoded({ extended: false }))
-// app.use(methodOverride())
-// app.use(errorHandler())
-
-// if (process.env.NODE_ENV === 'development') {
-//   app.use(errorHandler())
-// }
 
 app.use((_req, res, next) => {
   res.locals.ctx = {
