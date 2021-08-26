@@ -33,6 +33,17 @@ The main differences from what was taught are:
 
 Create a `.env` file and update with your Prismic details (use the `.env.example` as reference).
 
+Make sure you already have a website installed on Prismic CMS in order for everything to work as expected.
+
+To fill in the `.env` information just create a new project in Prismic CMS and in Settings / API & Secutiry generate an Access Token.
+
+For boilerplate basics just create a new _Custom Type_ called Meta with the following fields:
+* `Key Text` field - Title
+* `Key Text` field - Description
+* `Image` field - Image
+
+Don't forget to create a document with the information filled in afterwards.
+
 Install the project dependencies:
 
 ```bash
