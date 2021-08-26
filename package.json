@@ -36,10 +36,10 @@
   },
   "lint-staged": {
     "src/**/*.js": [
-      "npm run lint:scripts"
+      "eslint --fix"
     ],
     "src/**/*.scss": [
-      "npm run lint:styles"
+      "stylelint --fix"
     ]
   },
   "devDependencies": {
