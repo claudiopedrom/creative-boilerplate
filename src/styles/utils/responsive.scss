@@ -1,5 +1,3 @@
-@import '~include-media/dist/_include-media.scss';
-
 $breakpoints: (
   'sm': 640px,
   'md': 768px,
@@ -7,3 +5,5 @@ $breakpoints: (
   'xl': 1280px,
   '2xl': 1536px
 ) !default;
+
+@import '~include-media/dist/_include-media.scss';
