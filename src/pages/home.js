@@ -6,6 +6,7 @@ export default class Home extends Page {
       id: 'home',
       element: '.home',
       elements: {
+        wrapper: '.home__wrapper',
         // `elements` can have 3 types of values
         navigationClass: '.navigation',
         navigationSelector: document.querySelector('.navigation'),

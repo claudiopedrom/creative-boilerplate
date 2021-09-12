@@ -1,4 +1,5 @@
 import each from 'lodash/each'
+import normalizeWheel from 'normalize-wheel'
 
 import Home from '@/pages/home'
 import About from '@/pages/about'
@@ -16,9 +17,40 @@ class App {
     this.createPreloader()
 
     // Listeners
+    this.addEventListeners()
     this.addLinkListeners()
+
+    // Events
+    this.onResize()
+
+    // requestAnimationFrame
+    this.update()
   }
 
+  getPageTemplate() {
+    this.content = document.querySelector('.content')
+    this.template = this.content.getAttribute('data-template')
+  }
+
+  createPage() {
+    this.allPages = {
+      home: new Home(),
+      about: new About(),
+      detail: new Detail()
+    }
+
+    this.currentPage = this.allPages[this.template]
+    this.currentPage.create()
+  }
+
+  createPreloader() {
+    this.preloader = new Preloader()
+    this.preloader.once('completed', this.onPreloaded.bind(this))
+  }
+
+  /**
+   * Events.
+   */
   async onPageChange(url) {
     await this.currentPage.hide()
 
@@ -38,6 +70,8 @@ class App {
 
       this.currentPage = this.allPages[this.template]
       this.currentPage.create()
+
+      this.onResize()
       this.currentPage.show()
 
       this.addLinkListeners()
@@ -46,30 +80,42 @@ class App {
     }
   }
 
-  getPageTemplate() {
-    this.content = document.querySelector('.content')
-    this.template = this.content.getAttribute('data-template')
-  }
-
-  createPage() {
-    this.allPages = {
-      home: new Home(),
-      about: new About(),
-      detail: new Detail()
-    }
-
-    this.currentPage = this.allPages[this.template]
-    this.currentPage.create()
-  }
-
   onPreloaded() {
+    this.onResize()
     this.preloader.destroy()
     this.currentPage.show()
   }
 
-  createPreloader() {
-    this.preloader = new Preloader()
-    this.preloader.once('completed', this.onPreloaded.bind(this))
+  onResize() {
+    if (this.currentPage && this.currentPage.onResize) {
+      this.currentPage.onResize()
+    }
+  }
+
+  onWheel(event) {
+    if (this.currentPage && this.currentPage.onWheel) {
+      this.currentPage.onWheel(normalizeWheel(event))
+    }
+  }
+
+  /**
+   * Loop.
+   */
+  update() {
+    if (this.currentPage && this.currentPage.update) {
+      this.currentPage.update()
+    }
+
+    this.frame = window.requestAnimationFrame(this.update.bind(this))
+  }
+
+  /**
+   * Listeners.
+   */
+  addEventListeners() {
+    window.addEventListener('mousewheel', this.onWheel.bind(this))
+
+    window.addEventListener('resize', this.onResize.bind(this))
   }
 
   addLinkListeners() {

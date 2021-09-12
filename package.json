@@ -88,6 +88,8 @@
     "gsap": "3.7.1",
     "include-media": "1.4.10",
     "lodash": "4.17.21",
+    "normalize-wheel": "1.0.1",
+    "prefix": "1.0.0",
     "prismic-dom": "2.2.6",
     "pug": "3.0.2"
   }

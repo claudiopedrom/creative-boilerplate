@@ -1,4 +1,6 @@
 .detail {
+  // Needed to make smooth scrolling and preloader work
+  @extend %page;
 }
 
 .detail__wrapper {

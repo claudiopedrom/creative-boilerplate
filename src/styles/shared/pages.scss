@@ -1,0 +1,7 @@
+%page {
+  @extend %cover;
+
+  z-index: z('content');
+  visibility: hidden;
+  opacity: 0;
+}

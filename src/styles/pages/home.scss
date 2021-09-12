@@ -1,4 +1,6 @@
 .home {
+  // Needed to make smooth scrolling and preloader work
+  @extend %page;
 }
 
 .home__wrapper {

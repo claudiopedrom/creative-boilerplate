@@ -1,4 +1,18 @@
+html {
+  // Needed to make smooth scrolling work
+  @extend %cover;
+
+  position: fixed;
+  overflow: hidden;
+}
+
 body {
+  // Needed to make smooth scrolling work
+  @extend %cover;
+
+  position: fixed;
+
+  // Other body styles
   font-family: $font-suisse-bp;
   color: $color-quarter-spanish-white;
   background: $color-contessa;
