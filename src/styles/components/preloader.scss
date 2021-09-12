@@ -1,0 +1,42 @@
+.preloader {
+  @extend %center;
+  @extend %cover;
+
+  z-index: z('preloader');
+  color: $color-quarter-spanish-white;
+  text-align: center;
+  background: $color-contessa;
+}
+
+.preloader__text {
+  max-width: 66rem;
+  font-size: 0;
+
+  span {
+    display: inline-block;
+    overflow: hidden;
+  }
+
+  span span {
+    font-family: $font-george-x;
+    font-size: 5.3rem;
+    line-height: 1;
+  }
+}
+
+.preloader__number {
+  position: absolute;
+  bottom: 7.3rem;
+  left: 50%;
+  overflow: hidden;
+  font-size: 1.4rem;
+  transform: translateX(-50%);
+
+  @include media('<sm') {
+    font-size: 2.4rem;
+  }
+}
+
+.preloader__number__text {
+  display: inline-block;
+}

@@ -85,10 +85,14 @@ export default class Preloader extends Component {
   }
 
   createLoader() {
-    each(this.elements.images, image => {
-      image.onload = () => this.onAssetLoaded(image)
-      image.src = image.getAttribute('data-src')
-    })
+    if (this.elements.images && this.elements.images.length > 0) {
+      each(this.elements.images, image => {
+        image.onload = () => this.onAssetLoaded(image)
+        image.src = image.getAttribute('data-src')
+      })
+    } else {
+      this.onLoaded()
+    }
   }
 
   destroy() {
