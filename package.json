@@ -24,7 +24,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev:backend": "NODE_ENV=development nodemon server/index.js",
+    "dev:backend": "NODE_ENV=development nodemon --watch server server/index.js",
     "build:backend": "NODE_ENV=production node server/index.js",
     "dev:frontend": "webpack serve --progress --config webpack.config.development.js",
     "build:frontend": "webpack --progress --config webpack.config.build.js",
