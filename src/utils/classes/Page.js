@@ -1,14 +1,19 @@
 import gsap from 'gsap'
 import prefix from 'prefix'
+import each from 'lodash/each'
+import map from 'lodash/map'
 
-import { queryElements } from '@/utils/dom'
+import Title from '@/utils/animations/Title'
+
+import { queryElement, queryElements } from '@/utils/dom'
 
 export default class Page {
   constructor({ id, element, elements }) {
     this.id = id
     this.selector = element
     this.selectorChildren = {
-      ...elements
+      ...elements,
+      animationsTitles: '[data-animation="title"]'
     }
 
     this.transformPrefix = prefix('transform')
@@ -22,8 +27,18 @@ export default class Page {
       limit: 0
     }
 
-    this.element = document.querySelector(this.selector)
+    this.element = queryElement(this.selector)
     this.elements = queryElements(this.selectorChildren)
+
+    this.createAnimations()
+  }
+
+  createAnimations() {
+    this.animations = []
+
+    // Titles.
+    this.animationsTitles = map(this.elements.animationsTitles, element => new Title({ element }))
+    this.animations.push(...this.animationsTitles)
   }
 
   show() {
@@ -76,6 +91,8 @@ export default class Page {
     if (this.elements.wrapper) {
       this.scroll.limit = this.elements.wrapper.clientHeight - window.innerHeight
     }
+
+    each(this.animations, animation => animation.onResize())
   }
 
   onWheel({ pixelY }) {

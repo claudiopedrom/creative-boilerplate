@@ -1,7 +1,13 @@
 import each from 'lodash/each'
 
-export const isQuerySelector = entry =>
+const isQuerySelector = entry =>
   entry instanceof window.HTMLElement || entry instanceof window.NodeList
+
+export const queryElement = selector => {
+  if (selector instanceof window.HTMLElement) return selector
+
+  return document.querySelector(selector)
+}
 
 export const queryElements = selectorChildren => {
   const elements = {}

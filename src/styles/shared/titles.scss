@@ -6,3 +6,17 @@
     line-height: 1;
   }
 }
+
+.big-title-example {
+  max-width: 126rem;
+  margin: auto;
+  font-family: $font-george-x;
+  font-size: 10rem;
+  line-height: 1;
+  text-align: center;
+
+  @include media('<sm') {
+    max-width: 67.7rem;
+    font-size: 12rem;
+  }
+}
