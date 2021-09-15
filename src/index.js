@@ -51,7 +51,7 @@ class App {
   /**
    * Events.
    */
-  async onPageChange(url) {
+  async onChange(url) {
     await this.currentPage.hide()
 
     const request = await window.fetch(url)
@@ -76,7 +76,7 @@ class App {
 
       this.addLinkListeners()
     } else {
-      throw new Error('Something went wrong.')
+      console.log('Error')
     }
   }
 
@@ -127,7 +127,7 @@ class App {
 
         const { href } = link
 
-        this.onPageChange(href)
+        this.onChange(href)
       }
     })
   }

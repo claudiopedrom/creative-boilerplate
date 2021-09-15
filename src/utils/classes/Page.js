@@ -5,6 +5,8 @@ import map from 'lodash/map'
 
 import Title from '@/utils/animations/Title'
 
+import AsyncLoad from '@/utils/classes/AsyncLoad'
+
 import { queryElement, queryElements } from '@/utils/dom'
 
 export default class Page {
@@ -13,7 +15,8 @@ export default class Page {
     this.selector = element
     this.selectorChildren = {
       ...elements,
-      animationsTitles: '[data-animation="title"]'
+      animationsTitles: '[data-animation="title"]',
+      preloaders: '[data-src]'
     }
 
     this.transformPrefix = prefix('transform')
@@ -31,8 +34,25 @@ export default class Page {
     this.elements = queryElements(this.selectorChildren)
 
     this.createAnimations()
+    this.createPreloader()
   }
 
+  destroy() {
+    this.removeEventListeners()
+  }
+
+  /**
+   * Components.
+   */
+  createPreloader() {
+    this.preloaders = map(this.elements.preloaders, element => {
+      return new AsyncLoad({ element })
+    })
+  }
+
+  /**
+   * Animations.
+   */
   createAnimations() {
     this.animations = []
 
@@ -63,7 +83,8 @@ export default class Page {
   }
 
   hide() {
-    this.removeEventListeners()
+    this.destroy()
+
     this.animationOut = gsap.timeline()
 
     return new Promise(resolve => {
@@ -74,6 +95,24 @@ export default class Page {
     })
   }
 
+  /**
+   * Events.
+   */
+  onResize() {
+    if (this.elements.wrapper) {
+      this.scroll.limit = this.elements.wrapper.clientHeight - window.innerHeight
+    }
+
+    each(this.animations, animation => animation.onResize())
+  }
+
+  onWheel({ pixelY }) {
+    this.scroll.target += pixelY
+  }
+
+  /**
+   * Loop.
+   */
   update() {
     this.scroll.target = gsap.utils.clamp(0, this.scroll.limit, this.scroll.target)
     this.scroll.current = gsap.utils.interpolate(this.scroll.current, this.scroll.target, 0.1)
@@ -87,18 +126,9 @@ export default class Page {
     }
   }
 
-  onResize() {
-    if (this.elements.wrapper) {
-      this.scroll.limit = this.elements.wrapper.clientHeight - window.innerHeight
-    }
-
-    each(this.animations, animation => animation.onResize())
-  }
-
-  onWheel({ pixelY }) {
-    this.scroll.target += pixelY
-  }
-
+  /**
+   * Listeners.
+   */
   addEventListeners() {}
 
   removeEventListeners() {}
