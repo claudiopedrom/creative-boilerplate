@@ -60,7 +60,7 @@
     "imagemin-gifsicle": "7.0.0",
     "imagemin-jpegtran": "7.0.0",
     "imagemin-optipng": "8.0.0",
-    "imagemin-svgo": "9.0.0",
+    "imagemin-svgo": "10.0.0",
     "lint-staged": "11.1.2",
     "mini-css-extract-plugin": "2.3.0",
     "nodemon": "2.0.12",
