@@ -44,21 +44,7 @@ module.exports = {
       : [
           new ImageMinimizerPlugin({
             minimizerOptions: {
-              plugins: [
-                ['gifsicle', { interlaced: true }],
-                ['jpegtran', { progressive: true }],
-                ['optipng', { optimizationLevel: 5 }],
-                [
-                  'svgo',
-                  {
-                    plugins: [
-                      {
-                        removeViewBox: false
-                      }
-                    ]
-                  }
-                ]
-              ]
+              plugins: ['gifsicle', 'jpegtran', 'optipng', 'svgo']
             }
           }),
           new MiniCssExtractPlugin()
