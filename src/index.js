@@ -11,7 +11,7 @@ class App {
   constructor() {
     // Page
     this.getPageTemplate()
-    this.createPage()
+    this.createPages()
 
     // Components
     this.createPreloader()
@@ -23,7 +23,7 @@ class App {
     // Events
     this.onResize()
 
-    // requestAnimationFrame
+    // Loop
     this.update()
   }
 
@@ -32,17 +32,20 @@ class App {
     this.template = this.content.getAttribute('data-template')
   }
 
-  createPage() {
+  createPages() {
     this.allPages = {
       home: new Home(),
       about: new About(),
       detail: new Detail()
     }
 
-    this.currentPage = this.allPages[this.template]
-    this.currentPage.create()
+    this.page = this.allPages[this.template]
+    this.page.create()
   }
 
+  /**
+   * Components.
+   */
   createPreloader() {
     this.preloader = new Preloader()
     this.preloader.once('completed', this.onPreloaded.bind(this))
@@ -52,7 +55,7 @@ class App {
    * Events.
    */
   async onChange(url) {
-    await this.currentPage.hide()
+    await this.page.hide()
 
     const request = await window.fetch(url)
 
@@ -68,11 +71,11 @@ class App {
       this.content.setAttribute('data-template', this.template)
       this.content.innerHTML = divContent.innerHTML
 
-      this.currentPage = this.allPages[this.template]
-      this.currentPage.create()
+      this.page = this.allPages[this.template]
+      this.page.create()
 
       this.onResize()
-      this.currentPage.show()
+      this.page.show()
 
       this.addLinkListeners()
     } else {
@@ -83,18 +86,18 @@ class App {
   onPreloaded() {
     this.onResize()
     this.preloader.destroy()
-    this.currentPage.show()
+    this.page.show()
   }
 
   onResize() {
-    if (this.currentPage && this.currentPage.onResize) {
-      this.currentPage.onResize()
+    if (this.page && this.page.onResize) {
+      this.page.onResize()
     }
   }
 
   onWheel(event) {
-    if (this.currentPage && this.currentPage.onWheel) {
-      this.currentPage.onWheel(normalizeWheel(event))
+    if (this.page && this.page.onWheel) {
+      this.page.onWheel(normalizeWheel(event))
     }
   }
 
@@ -102,8 +105,8 @@ class App {
    * Loop.
    */
   update() {
-    if (this.currentPage && this.currentPage.update) {
-      this.currentPage.update()
+    if (this.page && this.page.update) {
+      this.page.update()
     }
 
     this.frame = window.requestAnimationFrame(this.update.bind(this))
