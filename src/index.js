@@ -33,13 +33,13 @@ class App {
   }
 
   createPages() {
-    this.allPages = {
+    this.pages = {
       home: new Home(),
       about: new About(),
       detail: new Detail()
     }
 
-    this.page = this.allPages[this.template]
+    this.page = this.pages[this.template]
     this.page.create()
   }
 
@@ -54,24 +54,28 @@ class App {
   /**
    * Events.
    */
-  async onChange(url) {
-    await this.page.hide()
+  async onChange({ url, push = true }) {
+    await this.page.hide() // hide current page
 
-    const request = await window.fetch(url)
+    const request = await window.fetch(url) // fetch requested page
 
     if (request.status === 200) {
       const html = await request.text()
-      const div = document.createElement('div')
+      const div = document.createElement('div') // create fake div
 
-      div.innerHTML = html
+      if (push) {
+        window.history.pushState({}, '', url)
+      }
 
-      const divContent = div.querySelector('.content')
+      div.innerHTML = html // save html response to fake div
 
-      this.template = divContent.getAttribute('data-template')
+      const divContent = div.querySelector('.content') // select new content from fake div
+
+      this.template = divContent.getAttribute('data-template') // update template value
       this.content.setAttribute('data-template', this.template)
-      this.content.innerHTML = divContent.innerHTML
+      this.content.innerHTML = divContent.innerHTML // apply fake div content to our page
 
-      this.page = this.allPages[this.template]
+      this.page = this.pages[this.template]
       this.page.create()
 
       this.onResize()
@@ -81,6 +85,13 @@ class App {
     } else {
       console.log('Error')
     }
+  }
+
+  onPopState() {
+    this.onChange({
+      url: window.location.pathname,
+      push: false
+    })
   }
 
   onPreloaded() {
@@ -105,6 +116,7 @@ class App {
    * Loop.
    */
   update() {
+    // start a separate animation loop for pages, if one exists
     if (this.page && this.page.update) {
       this.page.update()
     }
@@ -116,6 +128,8 @@ class App {
    * Listeners.
    */
   addEventListeners() {
+    window.addEventListener('popstate', this.onPopState.bind(this))
+
     window.addEventListener('mousewheel', this.onWheel.bind(this))
 
     window.addEventListener('resize', this.onResize.bind(this))
@@ -130,7 +144,7 @@ class App {
 
         const { href } = link
 
-        this.onChange(href)
+        this.onChange({ url: href })
       }
     })
   }
