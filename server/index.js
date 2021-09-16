@@ -3,6 +3,7 @@ const path = require('path')
 const express = require('express')
 const PrismicDOM = require('prismic-dom')
 const api = require('./utils/api')
+const parser = require('ua-parser-js')
 
 const app = express()
 const port = 3000
@@ -12,12 +13,20 @@ app.set('view engine', 'pug')
 
 app.use(express.static(path.join(__dirname, '..', 'public')))
 
-app.use((_req, res, next) => {
+app.use((req, res, next) => {
+  const ua = parser(req.headers['user-agent'])
+
+  res.locals.isMobile = ua.device.type === 'mobile'
+  res.locals.isTablet = ua.device.type === 'tablet'
+  res.locals.isDesktop = ua.device.type === undefined
+
   res.locals.ctx = {
     endpoint: process.env.PRISMIC_ENDPOINT,
     linkResolver: api.linkResolver
   }
+
   res.locals.PrismicDOM = PrismicDOM
+
   next()
 })
 
